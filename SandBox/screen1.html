@@ -1,0 +1,139 @@
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<form id="form" name="form">
+<body>
+<h2><center>NOMINAL ROLE</center></h2><br><br>
+<input type="checkbox"/><label>Single Candidate Entry</label>
+<input type="checkbox"/><label>Bulk Upload</label>
+<form class="example" action="/action_page.php">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+<button id="upload" name="upload">Upload</button></label><br><br>
+</form>
+Regno:<input type="text" id="regno" name="regno"><br><br>
+Name:<input type="text" id="name" name="name"><br><br>
+Year of joining:<select id="yoj">
+<option for=""></option>
+</select><br><br>
+Year:<select id="year">
+<option for=""> </option>
+</select><br><br>
+Degree:<select id="degree">
+<option for=""> </option>
+</select><br><br>
+Dept:<select id="dept">
+<option for=""> </option>
+</select><br><br>
+Section:<select id="section">
+<option for=""></option>
+</select><br><br>
+
+Email:<input type="text" id="email" name="email" size=30><br><br>
+<button onclick="myfun();">Save</button>
+<button>Reset</button>
+<button>Cancel</button><br><br>
+<table border=1>
+<tr>
+<th scope="col">S.no</th>
+<th scope="col">Regno</th>
+<th scope="col">Name</th>
+<th scope="col">Class</th>
+</tr>
+</table>
+</form>
+<style>
+body
+{
+background-image: url("");
+}
+fsize
+{
+font-weight:bold;
+}
+table
+{
+ border:1px solid black;
+ width:60%;
+ border-collapse:collapse;    
+}
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+</body>
+<script>
+function myfun()
+{
+var regno = document.getElementById("regno").value;
+var name = document.getElementById("name").value;
+var yoj = document.getElementById("yoj").value;
+var year = document.getElementById("year").value;
+var degree = document.getElementById("degree").value;
+var dept = document.getElementById("dept").value;
+var section = document.getElementById("section").value;
+var email=document.getElementById("email").value;
+var regformat=/^[a-zA-Z0-9_]*$/;
+var emailformat=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+var flag=true;
+if(regno == "" || regno == undefined || !regno.match(regformat) )
+{
+alert("please enter a valid regno");
+flag=false;
+}
+else if(name == "" || name == undefined)
+{
+alert("please enter the name");
+flag=false;
+}
+else if(yoj == "" || yoj == undefined)
+{
+alert("please enter the year of joining");
+flag=false;
+}
+else if(year == "" || year == undefined)
+{
+alert("please enter the year");
+flag=false;
+}
+else if(degree == "" || degree == undefined)
+{
+alert("please enter the degree");
+flag=false;
+}
+else if(dept == ""|| dept == undefined)
+{
+alert("please enter the dept");
+flag=false;
+}
+else if(section == ""|| section == undefined)
+{
+alert("please enter the section");
+flag=false;
+}
+else if(email == "" || email == undefined || !email.match(emailformat))
+{
+alert("please enter valid email");
+}
+}
+</script>
+</html>
