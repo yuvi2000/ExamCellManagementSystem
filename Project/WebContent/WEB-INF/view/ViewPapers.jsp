@@ -7,11 +7,11 @@
     <c:forEach var="Papers" items="${list}"> 
     <tr>
     <td>${Papers.paperId}</td>
-    <td>${Papers.degree}</td>
-    <td>${Papers.dept}</td>
-    <td>${Papers.year}</td>
-    <td>${Papers.semester}</td>
-     <td>${Papers.paper}</td>
+    <td>${Papers.degreeName}</td>
+    <td>${Papers.deptName}</td>
+    <td>${Papers.yearName}</td>
+    <td>${Papers.semesterName}</td>
+     <td>${Papers.paperName}</td>
     <td><a href="Edit/${Papers.paperId}">Edit</a></td>
     </tr>
     </c:forEach>
