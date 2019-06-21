@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iet.ExamCell.Model.ComboDO;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
+import com.iet.ExamCell.Model.Papers;
 
 @Service
 @Transactional
@@ -31,11 +32,22 @@ public interface HomeService {
 	  
 	  List<NominalRole> getAllNominalRoles();
 	  
-	  int update(NominalRole p);
+	  List<Papers> getAllPapers();
 	  
-	  List<ComboDO> getAllDept();
+	  int update(NominalRole p);
+	  int update1(Papers p);
+	  
 	  List<ComboDO> getAllDegree();
+	  List<ComboDO> getAllDept();
 	  List<ComboDO> getAllYear();
 	  List<ComboDO> getAllSection();
+	  List<ComboDO> getAllSemester();
+	  List<ComboDO> getAllPaper();
+
+	void savePapers(Papers papers);
+
+	Papers getPapersById(int id);
+	  
+	  
 	  
 	  }

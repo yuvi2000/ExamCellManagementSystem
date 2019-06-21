@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iet.ExamCell.Model.ComboDO;
+import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
+import com.iet.ExamCell.Model.Seating;
 import com.iet.ExamCell.Service.HomeService;
 
 @Controller
@@ -50,6 +52,7 @@ public class HomeController {
 		Login login=new Login();
 		model.addAttribute("login",login);
 		return "Login";
+	
 	}
 
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
@@ -104,21 +107,7 @@ public class HomeController {
     	}
         return "redirect:/viewNominalRole";//will redirect to viewNominalRole request mapping  
     }  
-    
-    @RequestMapping(value="/AddPapers",method = RequestMethod.POST)  
-    public String AddPapers(@ModelAttribute Papers papers){  
-    	if(papers.getPaperId()>0)
-    	{
-    		homeService.update(papers);
-    	}
-    	else
-    	{
-    		homeService.Addpapers(papers);  
-    	}
-        //return "redirect:/viewNominalRole";//will redirect to viewNominalRole request mapping  
-    }  
-    
-    
+         
     /* It displays object data into form for the given id.  
      * The @PathVariable puts URL data into variable.*/  
     @RequestMapping(value="/edit/{id}")  
@@ -143,4 +132,81 @@ public class HomeController {
         return "ViewNominalRole"; 
         
     } 
+
+@RequestMapping("/papers")  
+public String showforms(Map<String, Object> model){  
+	model.put("papers", new Papers());
+	
+	/*NominalRole nominalRole=homeService.getNominalRoleById(id);  
+    m.addAttribute("command",nominalRole);*/
+    
+    List<ComboDO> degreeList = homeService.getAllDegree();
+    model.put("degreeList", degreeList);
+    List<ComboDO> deptList = homeService.getAllDept();
+    model.put("deptList",deptList);
+    List<ComboDO> yearList = homeService.getAllYear();
+    model.put("yearList", yearList);
+    List<ComboDO> semesterList = homeService.getAllSemester();
+    model.put("semesterList", semesterList);
+    List<ComboDO> paperList = homeService.getAllPaper();
+    model.put("paperList", paperList);
+    
+    return "Papers"; 
+    
+}
+
+
+/*It saves object into database. The @ModelAttribute puts request data 
+ *  into model object. You need to mention RequestMethod.POST method  
+ *  because default request is GET*/  
+@RequestMapping(value="/savePapers",method = RequestMethod.POST)  
+public String savePapers(@ModelAttribute Papers papers){
+	
+	if(papers.getPaperId()>0)
+	{
+		homeService.update1(papers);
+	}
+	else
+	{
+		homeService.savePapers(papers);  
+	}
+    return "redirect:/viewPapers";
+}
+
+/* It displays object data into form for the given id.  
+ * The @PathVariable puts URL data into variable.*/  
+@RequestMapping(value="/Edit/{id}")  
+public String Edit(@PathVariable int id, Model m){  
+	Papers papers=homeService.getPapersById(id);  
+    m.addAttribute("command",papers);
+    return "Papers";  
+} 
+
+/* It updates Nominal Role by passing the model object NominallRole as parameter */  
+@RequestMapping(value="/Editsave",method = RequestMethod.POST)  
+public String Editsave(@ModelAttribute("papers") Papers papers){  
+	homeService.savePapers(papers);  
+    return "redirect:/viewPapers";  
+}  
+
+/* It provides list of students through the model object - NominallRole */  
+@RequestMapping("/viewPapers")  
+public String viewPapers(Model m){  
+    List<Papers> list=homeService.getAllPapers();  
+    m.addAttribute("list",list);
+    return "ViewPapers"; 
+    
+} 
+@RequestMapping("/seating")  
+public String showform1(Map<String, Object> model){  
+	model.put("seating", new Seating());
+	return "Seating";
+}
+
+@RequestMapping("/invigilation")  
+public String showform2(Map<String, Object> model){  
+	model.put("invigilation", new Invigilation());
+	
+	return "Invigilation";
+}
 }
