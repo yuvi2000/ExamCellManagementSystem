@@ -19,6 +19,7 @@ import com.iet.ExamCell.Model.ComboDO;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
+import com.iet.ExamCell.Model.Seating;
 
 @Service
 public class HomeServiceImpl implements HomeService {
@@ -30,8 +31,8 @@ public class HomeServiceImpl implements HomeService {
 	    homeDao.register(student);
 	  }
 
-	  public void register1(Papers subject) {
-		    homeDao.register1(subject);
+	  public void registerPaper(Papers subject) {
+		    homeDao.registerPaper(subject);
 		  }
 
 	  public Login validateUser(Login login) {
@@ -48,8 +49,8 @@ public class HomeServiceImpl implements HomeService {
 		    return homeDao.getNominalRoleById(regno);
 		  }
 	  
-	  public Papers getPapersById(int id) {
-		    return homeDao.getPapersById(id);
+	  public List<Papers> getPapersById(int id) {
+		    return homeDao.getPapersById();
 		  }
 	  
 	  public List<NominalRole> getAllNominalRoles(){
@@ -63,8 +64,8 @@ public class HomeServiceImpl implements HomeService {
 	  public int update(NominalRole p){
 		  return homeDao.update(p);
 	  }
-	  public int update1(Papers p){
-		  return homeDao.update1(p);
+	  public int updatePaper(Papers p){
+		  return homeDao.updatePaper(p);
 	  }
 
 
@@ -91,4 +92,22 @@ public class HomeServiceImpl implements HomeService {
 		  return homeDao.getAllPaper(); 
 	  }
 
+	@Override
+	public void updateseating(Seating seating) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveSeating(Seating seating) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Seating> getSeatingById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	  
 }

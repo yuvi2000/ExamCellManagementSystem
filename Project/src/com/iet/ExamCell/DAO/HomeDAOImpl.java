@@ -116,6 +116,7 @@ public class HomeDAOImpl implements HomeDAO {
 		    String sql="select num_nominal_role_id, vch_name, dtt_year_of_joining, num_year_id, num_degree_id, num_dept_id, num_section_id, vch_email_id from tbl_mst_nominal_role where num_nominal_role_id=?";  
 		    return jdbcTemplate.queryForObject(sql, new Object[]{regno},new BeanPropertyRowMapper<NominalRole>(NominalRole.class));  
 		}  
+		
 		public List<NominalRole> getAllNominalRoles(){  
 		    return jdbcTemplate.query("select num_nominal_role_id, vch_reg_number, vch_name, dtt_year_of_joining, num_year_id, num_degree_id, num_dept_id, num_section_id, vch_email_id  from tbl_mst_nominal_role",new RowMapper<NominalRole>(){  
 		        public NominalRole mapRow(ResultSet rs, int row) throws SQLException {  
@@ -214,13 +215,39 @@ public class HomeDAOImpl implements HomeDAO {
 			    String sql="delete from tbl_trn_papers where num_paper_id="+id+"";  
 			    return jdbcTemplate.update(sql);  
 			}  
-			public Papers getPapersById(int semester){  
-			    String sql="select tbl_trn_papers.num_trn_paper_id, tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
+			public List<Papers> getPapersById(){  
+			    String sql= "select tbl_trn_papers.num_trn_paper_id, tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
 		    			"tbl_mst_dept.num_dept_id, tbl_mst_dept.vch_dept_name, tbl_mst_year.num_year_id, tbl_mst_year.num_year,"+
 		    			"tbl_mst_semesters.num_sem_id, tbl_mst_semesters.vch_sem_name, tbl_mst_papers_list.num_paper_id, tbl_mst_papers_list.vch_paper_name"+
-		    			"from tbl_trn_papers,tbl_mst_degree,tbl_mst_dept,tbl_mst_year,tbl_mst_semesters,tbl_mst_papers_list where num_trn_paper_id=?";  
-			    return jdbcTemplate.queryForObject(sql, new Object[]{semester},new BeanPropertyRowMapper<Papers>(Papers.class));  
-			}  
+		    			" from tbl_trn_papers,tbl_mst_degree,tbl_mst_dept,tbl_mst_year,tbl_mst_semesters,tbl_mst_papers_list"+
+		    			" where tbl_trn_papers.num_degree_id = tbl_mst_degree.num_degree_id"+
+		    			" AND tbl_trn_papers.num_dept_id = tbl_mst_dept.num_dept_id"+
+		    			" AND tbl_trn_papers.num_year_id = tbl_mst_year.num_year_id"+
+		    			" AND tbl_trn_papers.num_sem_id = tbl_mst_semesters.num_sem_id"+
+		    			" AND tbl_trn_papers.num_paper_id = tbl_mst_papers_list.num_paper_id"+
+		    			" order by num_trn_paper_id";
+			    
+			    System.out.print(sql);
+			    //return jdbcTemplate.queryForObject(sql, new Object[]{semester},new BeanPropertyRowMapper<Papers>(Papers.class));
+			    return jdbcTemplate.query(sql,new RowMapper<Papers>(){
+			    public Papers mapRow(ResultSet rs, int row) throws SQLException {  
+		        	Papers e=new Papers();  
+		        	e.setPaperId(rs.getInt(1));
+		        	e.setDegree(rs.getInt(2));
+		        	e.setDegreeName(rs.getString(3));
+		        	e.setDept(rs.getInt(4));
+		        	e.setDeptName(rs.getString(5));
+		            e.setYear(rs.getInt(6));
+		            e.setYearName(rs.getInt(7));
+		            e.setSemester(rs.getInt(8));
+		            e.setSemesterName(rs.getString(9));
+		            e.setPaper(rs.getInt(10));			           
+		            e.setPaperName(rs.getString(11));
+		            return e;  
+		        
+			    }  
+			    });  
+			} 
 			public List<Papers> getAllPapers(){  
 			    return jdbcTemplate.query("select tbl_mst_papers_list.num_paper_id, tbl_mst_papers_list.vch_paper_name from tbl_mst_papers_list",new RowMapper<Papers>(){  
 			        public Papers mapRow(ResultSet rs, int row) throws SQLException {  
@@ -291,7 +318,7 @@ public class HomeDAOImpl implements HomeDAO {
 			
 			
 			
-		}
+		
 	class NominalRoleMapper implements RowMapper<NominalRole> {
 
 	  public NominalRole mapRow(ResultSet rs, int arg1) throws SQLException {
@@ -329,7 +356,16 @@ public class HomeDAOImpl implements HomeDAO {
 	    return subject;
 	  }
 	}
-	
+
+
+	@Override
+	public int updatePaper(Papers p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+}	
 		  
 		  
 	
