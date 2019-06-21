@@ -1,17 +1,18 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-
-		<!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <head>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 </head>
 <body>
+<form:form method="post" class="example" action="saveInvigilation" modelAttribute="invigilation">
 <div class="fsize">FACULTY INVIGILATION SCHEDULE</div><br><br><br>
-<label for="no">Hall no:</label>
-<input type="text" required maxlength="5" minlength="2" size="15"\><br><br>
-<label for="date">Date:</label>
-<input type="date" required maxlength="5" minlength="2" size="15"\><br><br>
+Hall no:<form:input path="hallno"/><br><br>
+Date:<form:input type="date" path="date"/><br><br>
+Session:<form:input path="session"/><br><br>
 <table>
 <br><br>
 <tr>
@@ -24,6 +25,7 @@
 <th scope="col">Signature</th>
 </tr>
 </table>
+</form:form>
 <style type="text/css">
 .fsize
 {

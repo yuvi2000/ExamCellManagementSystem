@@ -9,11 +9,12 @@
     <td>${Papers.paperId}</td>
     <td>${Papers.degree}</td>
     <td>${Papers.dept}</td>
+    <td>${Papers.year}</td>
     <td>${Papers.semester}</td>
      <td>${Papers.paper}</td>
-    <td><a href="edit/${Papers.paperId}">Edit</a></td>
+    <td><a href="Edit/${Papers.paperId}">Edit</a></td>
     </tr>
     </c:forEach>
     </table>
     <br/>
-    <a href="papers">Add New Papers</a>
+  

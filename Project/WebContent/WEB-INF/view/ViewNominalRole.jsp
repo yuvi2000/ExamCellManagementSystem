@@ -20,4 +20,6 @@
     </c:forEach>
     </table>
     <br/>
-    <a href="nominalRole">Add New Nominal Role</a>
+    <a href="nominalRole">Add New Nominal Role</a><br><br>
+
+    

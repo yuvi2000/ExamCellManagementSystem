@@ -25,9 +25,14 @@
   </nav>
   <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="/ExamCell/nominalRole">Home</a>
-    <a href="#">About</a>
-    <a href="#">Settings</a>
+    <a href="/ExamCell/nominalRole">NominalRole</a>
+    <a href="/ExamCell/papers">Papers</a>
+    <a href="/ExamCell/timetable">Timetable</a>
+    <a href="/ExamCell/seating">Seating plan</a>
+    <a href="/ExamCell/invigilation">Faculty Invigilation</a>
+    <a href="/ExamCell/attendance">Attendance</a>
+    <a href="/ExamCell/hallslip">Hall Slip</a>
+    <a href="/ExamCell/dispatch">Dispatch</a>
   </div>
 
   <div id="main">

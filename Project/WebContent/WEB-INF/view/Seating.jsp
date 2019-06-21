@@ -1,29 +1,30 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-
-		<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <body>
+   <form:form method="post" class="example" action="saveSeating" modelAttribute="seating">
 <div class="fsize">SEATING PLAN</div><br><br><br>
-<label for="no">Hall no:</label>
-<input type="text" maxlength="10" minlength="3" size="20"\><br><br>
-<label for="class">class:</label>
-<input type="text" maxlength="10" minlength="3" size="20"\><br><br>
-<label for="regno">Regno:</label>
-<input type="text" maxlength="10" minlength="3" size="20"\><br><br>
-<label for="seats">Seating capacity:</label>
-<input type="text" maxlength="10" minlength="3" size="20"\><br><br>
-<button type="button"/>Save</button>
+Hall no:<form:input path="hallno"/><br><br>
+Year:<form:input path="year" id="year"/><br><br>
+Degree:<form:input path="degree" id="degree"/><br><br>
+Section:<form:input path="section" id="section"/><br><br>
+Regno:<form:input path="regno" id="regno"/><br><br>
+Seating Capacity:<form:input path="seats" id="seats"/><br><br>
+<button type="submit">Save</button>
 <button type="button">Cancel</button><br><br>
 <table border=1>
     <tr>
-        <th scope="col">S.no</th></th>
-        <th scope="col">Hall no</th></th>
-        <th scope="col">Class</th></th>
-        <th scope="col">Regno</th></th>
-        <th scope="col">Total no of students</th></th>
+        <th scope="col">S.no</th>
+        <th scope="col">Hall no</th>
+        <th scope="col">Class</th>
+        <th scope="col">Regno</th>
+        <th scope="col">Total no of students</th>
     </tr>
 </table>
+</form:form>
 <style type="text/css">
 .fsize
 {
