@@ -10,16 +10,16 @@ public class Seating implements Serializable {
 	private int degree;
 	private int section ;
 	private int regno;
-	private int seats;
+	private int noofstudents;
 	 
-public Seating(int hallno, int year, int degree, int dept, int regno, int seats)
+public Seating(int hallno, int year, int degree, int dept, int regno, int noofstudents)
 {
 	this.hallno=hallno;
 	this.year=year;
 	this.degree=degree;
 	this.section=section;
 	this.regno=regno;
-	this.seats=seats;
+	this.noofstudents=noofstudents;
 	
 }
 public Seating() {
@@ -61,13 +61,10 @@ public int getRegno() {
 public void setRegno(int regno) {
 	this.regno = regno;
 }
-public int getSeats() {
-	return seats;
+public int getNoofstudents() {
+	return noofstudents;
 }
-public void setSeats(int seats) {
-	this.seats = seats;
+public void setNoofstudents(int noofstudents) {
+	this.noofstudents = noofstudents;
 }
-	
-	
-
 }

@@ -37,6 +37,7 @@ public interface HomeService {
 	  
 	  int update(NominalRole p);
 	  int updatePaper(Papers p);
+	  int updateSeating(Seating p);
 	  
 	  List<ComboDO> getAllDegree();
 	  List<ComboDO> getAllDept();
@@ -44,16 +45,14 @@ public interface HomeService {
 	  List<ComboDO> getAllSection();
 	  List<ComboDO> getAllSemester();
 	  List<ComboDO> getAllPaper();
-
+	  List<ComboDO> getAllHallno();
 	void savePapers(Papers papers);
 
 	List<Papers> getPapersById(int id);
 
-	void updateseating(Seating seating);
+	List<Seating> getSeatingById(int id);
 
 	void saveSeating(Seating seating);
 
-	List<Seating> getSeatingById(int id);
-	  
-	  
-	  }
+
+}
