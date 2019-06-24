@@ -7,12 +7,28 @@
    <body>
    <form:form method="post" class="example" action="saveSeating" modelAttribute="seating">
 <div class="fsize">SEATING PLAN</div><br><br><br>
-Hall no:<form:input path="hallno"/><br><br>
-Year:<form:input path="year" id="year"/><br><br>
-Degree:<form:input path="degree" id="degree"/><br><br>
-Section:<form:input path="section" id="section"/><br><br>
-Regno:<form:input path="regno" id="regno"/><br><br>
-Seating Capacity:<form:input path="seats" id="seats"/><br><br>
+Hallno:<form:select path="hallnoId" id="hall">
+<form:option value="0" label="----Select hall----"/>
+<form:options items="${hallList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Year:<form:select path="yearId" id="year">
+<form:option value="0" label="----Select Year----"/>
+<form:options items="${yearList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Degree:<form:select path="degreeId" id="degree">
+<form:option value="0" label="----Select Degree----"/>
+<form:options items="${degreeList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Section:<form:select path="sectionId" id="section">
+<form:option value="0" label="----Select Section----"/>
+<form:options items="${sectionList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Regno:<form:select path="nominalRoleId" id="nominalRoleId">
+<form:option value="0" label="----Select Regno----"/>
+<form:options items="${regnoList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Total no of students:<form:input path="noofstudents" id="noofstudents"/><br><br>
+
 <button type="submit">Save</button>
 <button type="button">Cancel</button><br><br>
 <table border=1>
