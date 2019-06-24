@@ -197,8 +197,65 @@ public String viewPapers(Model m){
     
 } 
 @RequestMapping("/seating")  
-public String showform1(Map<String, Object> model){  
+public String showSeating(Map<String, Object> model){  
 	model.put("seating", new Seating());
-	return "Seating";
-}
+	
+	/*NominalRole nominalRole=homeService.getNominalRoleById(id);  
+    m.addAttribute("command",nominalRole);*/
+    
+	List<ComboDO> hallList = homeService.getAllHall();
+    model.put("hallList", hallList);
+    List<ComboDO> yearList = homeService.getAllYear();
+    model.put("yearList", yearList);
+    List<ComboDO> degreeList = homeService.getAllDegree();
+    model.put("degreeList", degreeList);
+    List<ComboDO> sectionList = homeService.getAllSection();
+    model.put("sectionList", sectionList);
+    List<ComboDO> regnoList = homeService.getAllRegno();
+    model.put("regnoList", regnoList);
+    
+    
+	    	return "Seating"; 
+}  
+
+/*It saves object into database. The @ModelAttribute puts request data 
+ *  into model object. You need to mention RequestMethod.POST method  
+ *  because default request is GET*/  
+@RequestMapping(value="/saveSeating",method = RequestMethod.POST)  
+public String saveSeating(@ModelAttribute Seating seating){  
+	if(seating.getSeatingId()>0)
+	{
+		homeService.updateseating(seating);
+	}
+	else
+	{
+		homeService.saveSeating(seating);  
+	}
+    return "redirect:/viewSeating";//will redirect to viewNominalRole request mapping  
+}  
+     
+/* It displays object data into form for the given id.  
+ * The @PathVariable puts URL data into variable.*/  
+@RequestMapping(value="/editSeating/{id}")  
+public String editSeating(@PathVariable int id, Model m){  
+	Seating seating=homeService.getSeatingById(id);  
+    m.addAttribute("command",seating);
+    return "Seating";  
+}  
+
+/* It updates Nominal Role by passing the model object NominallRole as parameter */  
+@RequestMapping(value="/editsaveSeating",method = RequestMethod.POST)  
+public String editsaveSeating(@ModelAttribute("seating") Seating seating){  
+	homeService.saveSeating(seating);  
+    return "redirect:/viewSeating";  
+}  
+
+/* It provides list of students through the model object - NominallRole */  
+@RequestMapping("/viewSeating")  
+public String viewSeating(Model m){  
+    List<Seating> list=homeService.getAllSeating();  
+    m.addAttribute("list",list);
+    return "ViewSeating"; 
+    
+} 
 }

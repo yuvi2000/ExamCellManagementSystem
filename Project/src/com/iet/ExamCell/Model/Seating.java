@@ -5,65 +5,83 @@ import java.io.Serializable;
 public class Seating implements Serializable {
 	
 	private int seatingId;
-	private int hallno;
-	private int year;
-	private int degree;
-	private int section ;
-	private int regno;
+	private int hallnoId;
+	private int yearId;
+	private int degreeId;
+	private int sectionId ;
+	private int nominalRoleId;
 	private int noofstudents;
 	 
-public Seating(int hallno, int year, int degree, int dept, int regno, int noofstudents)
-{
-	this.hallno=hallno;
-	this.year=year;
-	this.degree=degree;
-	this.section=section;
-	this.regno=regno;
-	this.noofstudents=noofstudents;
+
+public Seating(int seatingId, int hallnoId, int yearId, int degreeId,
+			int sectionId, int nominalRoleId, int noofstudents) {
 	
-}
+		this.seatingId = seatingId;
+		this.hallnoId = hallnoId;
+		this.yearId = yearId;
+		this.degreeId = degreeId;
+		this.sectionId = sectionId;
+		this.nominalRoleId = nominalRoleId;
+		this.noofstudents = noofstudents;
+	}
+
 public Seating() {
 	// TODO Auto-generated constructor stub
 }
+
 public int getSeatingId() {
 	return seatingId;
 }
+
 public void setSeatingId(int seatingId) {
 	this.seatingId = seatingId;
 }
-public int getHallno() {
-	return hallno;
+
+public int getHallnoId() {
+	return hallnoId;
 }
-public void setHallno(int hallno) {
-	this.hallno = hallno;
+
+public void setHallnoId(int hallnoId) {
+	this.hallnoId = hallnoId;
 }
-public int getYear() {
-	return year;
+
+public int getYearId() {
+	return yearId;
 }
-public void setYear(int year) {
-	this.year = year;
+
+public void setYearId(int yearId) {
+	this.yearId = yearId;
 }
-public int getDegree() {
-	return degree;
+
+public int getDegreeId() {
+	return degreeId;
 }
-public void setDegree(int degree) {
-	this.degree = degree;
+
+public void setDegreeId(int degreeId) {
+	this.degreeId = degreeId;
 }
-public int getSection() {
-	return section;
+
+public int getSectionId() {
+	return sectionId;
 }
-public void setSection(int section) {
-	this.section = section;
+
+public void setSectionId(int sectionId) {
+	this.sectionId = sectionId;
 }
-public int getRegno() {
-	return regno;
+
+
+public int getNominalRoleId() {
+	return nominalRoleId;
 }
-public void setRegno(int regno) {
-	this.regno = regno;
+
+public void setNominalRoleId(int nominalRoleId) {
+	this.nominalRoleId = nominalRoleId;
 }
+
 public int getNoofstudents() {
 	return noofstudents;
 }
+
 public void setNoofstudents(int noofstudents) {
 	this.noofstudents = noofstudents;
 }
