@@ -7,20 +7,19 @@
    <body>
 <h2><center>SUBJECTS FOR THE CLASSES</center></h2>
 <form:form method="post" class="example" action="savePapers" modelAttribute="papers">
-
-Degree:<form:select path="degree" id="degree">
+Degree:<form:select path="degreeId" id="degree">
 <form:option value="0" label="----Select Degree----"/>
 <form:options items="${degreeList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-Dept:<form:select path="dept" id="dept">
+Dept:<form:select path="deptId" id="dept">
 <form:option value="0" label="----Select Dept----"/>
 <form:options items="${deptList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-Year:<form:select path="year" id="year">
+Year:<form:select path="yearId" id="year">
 <form:option value="0" label="----Select Year----"/>
 <form:options items="${yearList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-Semester:<form:select path="semester" id="semester">
+Semester:<form:select path="semesterId" id="semester">
 <form:option value="0" label="----Select Semester----"/>
 <form:options items="${semesterList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
