@@ -17,7 +17,6 @@ import com.iet.ExamCell.Model.ComboDO;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
-import com.iet.ExamCell.Model.Seating;
 
 @Service
 @Transactional
@@ -36,8 +35,7 @@ public interface HomeService {
 	  List<Papers> getAllPapers();
 	  
 	  int update(NominalRole p);
-	  int updatePaper(Papers p);
-	  int updateSeating(Seating p);
+	  int update1(Papers p);
 	  
 	  List<ComboDO> getAllDegree();
 	  List<ComboDO> getAllDept();
@@ -45,14 +43,11 @@ public interface HomeService {
 	  List<ComboDO> getAllSection();
 	  List<ComboDO> getAllSemester();
 	  List<ComboDO> getAllPaper();
-	  List<ComboDO> getAllHallno();
+
 	void savePapers(Papers papers);
 
-	List<Papers> getPapersById(int id);
-
-	List<Seating> getSeatingById(int id);
-
-	void saveSeating(Seating seating);
-
-
-}
+	Papers getPapersById(int id);
+	  
+	  
+	  
+	  }

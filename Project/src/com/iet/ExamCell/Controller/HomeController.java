@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iet.ExamCell.Model.ComboDO;
-import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
@@ -134,8 +133,11 @@ public class HomeController {
     } 
 
 @RequestMapping("/papers")  
-public String showPaperform(Map<String, Object> model){  
+public String showforms(Map<String, Object> model){  
 	model.put("papers", new Papers());
+	
+	/*NominalRole nominalRole=homeService.getNominalRoleById(id);  
+    m.addAttribute("command",nominalRole);*/
     
     List<ComboDO> degreeList = homeService.getAllDegree();
     model.put("degreeList", degreeList);
@@ -161,7 +163,7 @@ public String savePapers(@ModelAttribute Papers papers){
 	
 	if(papers.getPaperId()>0)
 	{
-		homeService.updatePaper(papers);
+		homeService.update1(papers);
 	}
 	else
 	{
@@ -172,16 +174,16 @@ public String savePapers(@ModelAttribute Papers papers){
 
 /* It displays object data into form for the given id.  
  * The @PathVariable puts URL data into variable.*/  
-@RequestMapping(value="/EditPaper/{id}")  
-public String EditPaper(@PathVariable int id, Model m){  
-	List<Papers> papers=homeService.getPapersById(id);  
+@RequestMapping(value="/Edit/{id}")  
+public String Edit(@PathVariable int id, Model m){  
+	Papers papers=homeService.getPapersById(id);  
     m.addAttribute("command",papers);
     return "Papers";  
 } 
 
 /* It updates Nominal Role by passing the model object NominallRole as parameter */  
-@RequestMapping(value="/EditPapersave",method = RequestMethod.POST)  
-public String EditPapersave(@ModelAttribute("papers") Papers papers){  
+@RequestMapping(value="/Editsave",method = RequestMethod.POST)  
+public String Editsave(@ModelAttribute("papers") Papers papers){  
 	homeService.savePapers(papers);  
     return "redirect:/viewPapers";  
 }  
@@ -189,71 +191,14 @@ public String EditPapersave(@ModelAttribute("papers") Papers papers){
 /* It provides list of students through the model object - NominallRole */  
 @RequestMapping("/viewPapers")  
 public String viewPapers(Model m){  
-    List<Papers> list=homeService.getPapersById(0);  
+    List<Papers> list=homeService.getAllPapers();  
     m.addAttribute("list",list);
     return "ViewPapers"; 
     
 } 
 @RequestMapping("/seating")  
-public String showSeatingform(Map<String, Object> model){  
+public String showform1(Map<String, Object> model){  
 	model.put("seating", new Seating());
-
-List<ComboDO> hallnoList = homeService.getAllHallno();
-model.put("hallnoList", hallnoList);
-List<ComboDO> yearList = homeService.getAllYear();
-model.put("yearList", yearList);
-List<ComboDO> degreeList = homeService.getAllDegree();
-model.put("degreeList",degreeList);
-List<ComboDO> sectionList = homeService.getAllSection();
-model.put("sectionList", sectionList);
-List<ComboDO> semesterList = homeService.getAllSemester();
-model.put("semesterList", semesterList);
-return "Seating"; 
-
-}
-  
-@RequestMapping(value="/saveSeating",method = RequestMethod.POST)  
-public String saveSeating(@ModelAttribute Seating seating){
-
-if(seating.getSeatingId()>0)
-{
-	homeService.updateseating(seating);
-}
-else
-{
-	homeService.saveSeating(seating);  
-}
-return "redirect:/viewSeating";
-}
-
-/* It displays object data into form for the given id.  
-* The @PathVariable puts URL data into variable.*/  
-@RequestMapping(value="/EditSeating/{id}")  
-public String EditSeating(@PathVariable int id, Model m){  
-List<Seating> seating=homeService.getSeatingById(id);  
-m.addAttribute("command",seating);
-return "Seating";  
-} 
-
-@RequestMapping(value="/EditSeatingsave",method = RequestMethod.POST)  
-public String EditSeatingsave(@ModelAttribute("seating") Seating seating){  
-homeService.saveSeating(seating);  
-return "redirect:/viewSeating";  
-}  
-
-@RequestMapping("/viewSeating")  
-public String viewSeating(Model m){  
-List<Seating> list=homeService.getSeatingById(0);  
-m.addAttribute("list",list);
-return "ViewSeating"; 
-
-} 
-
-
-@RequestMapping("/invigilation")  
-public String showform2(Map<String, Object> model){  
-	model.put("invigilation", new Invigilation());
-	
-	return "Invigilation";
+	return "Seating";
 }
 }
