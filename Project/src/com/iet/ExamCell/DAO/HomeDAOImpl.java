@@ -29,6 +29,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iet.ExamCell.Model.ComboDO;
+import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
@@ -365,6 +366,7 @@ public class HomeDAOImpl implements HomeDAO {
 				return jdbcTemplate.query("select num_seating_id,"+ 
 			    		" tbl_mst_hall.num_hall_id, tbl_mst_hall.vch_hall_no, "+
 			    		" CONCAT(tbl_mst_year.num_year,' ',tbl_mst_degree.vch_degree_name,' ',tbl_mst_section.vch_section) as vch_class,"+
+			    		" tbl_mst_nominal_role.num_nominal_role_id, tbl_mst_nominal_role.vch_reg_number,"+
 			    		" tbl_mst_nominal_role.num_nominal_role_id, tbl_mst_nominal_role.vch_reg_number, num_total_no_of_students"+
 			    		" from tbl_trn_seating, tbl_mst_hall, tbl_mst_year, tbl_mst_degree, tbl_mst_section, tbl_mst_nominal_role"+
 			    		" where tbl_trn_seating.num_hall_id = tbl_mst_hall.num_hall_id"+
@@ -380,8 +382,9 @@ public class HomeDAOImpl implements HomeDAO {
 			        	e.setHallName(rs.getString(3));
 			            e.setClassName(rs.getString(4)); 
 			            e.setNominalRoleId(rs.getInt(5));  
-			            e.setNominalRoleName(rs.getString(6));
-			            e.setNoofstudents(rs.getInt(7));
+			            e.setNominalRolefrom(rs.getString(6));
+			            e.setNominalRoleupto(rs.getString(7));
+			            e.setNoofstudents(rs.getInt(8));
 			           
 			            return e;  
 			        }  
@@ -499,18 +502,91 @@ class SeatingMapper implements RowMapper<Seating> {
 		  //seating.setSectionName(rs.getString("vch_section"));
 		  seating.setClassName(rs.getString("vch_class"));
 		  seating.setNominalRoleId(rs.getInt("num_nominal_role_id"));
-		  seating.setNominalRoleName(rs.getString("vch_reg_number"));
+		  seating.setNominalRolefrom(rs.getString("vch_reg_number"));
+		  seating.setNominalRoleupto(rs.getString("vch_reg_number"));
 		  seating.setNoofstudents(rs.getInt("num_total_no_of_students"));
 		  
 	    return seating;
 	  }
 }
+public void registerInvigilation(Invigilation faculty){
+
+    String sql = "insert into tbl_trn_invigilation (num_invigilation_id, dtt_date, vch_session, num_hall_id, num_faculty_id, num_dept_id) "
+    		+ "values(?,?,?,?,?,?)";
+	
+    
+    jdbcTemplate.update(sql, new Object[] { faculty.getInvigilationId(),
+    	faculty.getDate(), faculty.getSession(), faculty.getHallnoId(), faculty.getFacultyId(), faculty.getDeptId()});
+  }
+
+  public Invigilation showFaculties(Invigilation faculty) {
+
+    String sql = "select num_invigilation_id, dtt_date, vch_session, num_faculty_id, num_dept_id, num_year_id, num_degree_id, num_dept_id,num_section_id from tbl_mst_invigilation";// where num_Student_Id=" + student.getStudentId() ;//" and vch_student_fname='" + student.getFirstname() + "'";
+
+    List<Invigilation> faculties = jdbcTemplate.query(sql, new InvigilationMapper());
+
+    return faculties.size() > 0 ? faculties.get(0) : null;
+  }
+  
+  public int updateInvigilation(Invigilation p){  
+	    String sql="update tbl_trn_invigilation set dtt_date='"+p.getDate()+"', vch_session='"+p.getSession()+"', num_hall_id='"+p.getHallnoId()+"', num_faculty_id="+p.getFacultyId()+", num_dept_id="+p.getDeptId()+"'";
+	    
+	     return jdbcTemplate.update(sql);  
+	}  
+	public int deleteInvigilation(int id){  
+	    String sql="delete from tbl_mst_nominal_role where num_nominal_role_id="+id+"";  
+	    return jdbcTemplate.update(sql);  
+	}  
+	public Invigilation getInvigilationById(int id){  
+	    String sql="select num_invigilation_id, dtt_date, vch_session, num_hall_id, num_faculty_id, num_dept_id, from tbl_trn_invigilation where num_invigilation_id=?";  
+	    return jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Invigilation>(Invigilation.class));  
+	}  
+	public List<Invigilation> getAllInvigilations(){  
+	    return jdbcTemplate.query("select num_invigilation_id, dtt_date, vch_session, num_hall_id, num_faculty_id, num_dept_id, from tbl_trn_invigilation",new RowMapper<Invigilation>(){  
+	        public Invigilation mapRow(ResultSet rs, int row) throws SQLException {  
+	        	Invigilation e=new Invigilation();  
+	            e.setInvigilationId(rs.getInt(1));
+	        	e.setDate(rs.getDate(2));  
+	            e.setSession(rs.getString(3));  
+	            e.setHallnoId(rs.getInt(4));  
+	            e.setFacultyId(rs.getInt(5));  
+	            e.setDeptId(rs.getInt(6));
+	            
+	            return e;  
+	        }  
+	    });  
+	} 
+
+	// to load Department combobox values
+	public List<ComboDO> getDept(){  
+	    return jdbcTemplate.query("select num_dept_id, vch_dept_name from tbl_mst_dept where char_active_status='Y'",new RowMapper<ComboDO>(){  
+	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
+	        	ComboDO e=new ComboDO();  
+	            e.setId(rs.getInt(1));
+	        	e.setValue(rs.getString(2));		            
+	            return e;  
+	        }  
+	    });  
+	}
+	
+	public List<ComboDO> getAllFaculty(){  
+	    return jdbcTemplate.query("select num_year_id, num_year from tbl_mst_year where char_active_status='Y'",new RowMapper<ComboDO>(){  
+	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
+	        	ComboDO e=new ComboDO();  
+	            e.setId(rs.getInt(1));
+	        	e.setValue(rs.getString(2));		            
+	            return e;  
+	        }  
+	    });  
+	}
+	public List<ComboDO> getHallId(){  
+	    return jdbcTemplate.query("select num_section_id, vch_section from tbl_mst_section where char_active_status='Y'",new RowMapper<ComboDO>(){  
+	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
+	        	ComboDO e=new ComboDO();  
+	            e.setId(rs.getInt(1));
+	        	e.setValue(rs.getString(2));		            
+	            return e;  
+	        }  
+	    });  
+	}
 }
-
-
-
-	
-
-		  
-	
-	
