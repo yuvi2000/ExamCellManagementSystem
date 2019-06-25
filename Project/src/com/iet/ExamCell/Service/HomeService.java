@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iet.ExamCell.Model.ComboDO;
+import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
@@ -64,9 +65,12 @@ public interface HomeService {
 
 	void saveSeating(Seating seating);
 
-	
+	void saveInvigilation(Invigilation invigilation);
+
+	Invigilation getInvigilationById(int id);
+
+	List<Invigilation> getAllInvigilation();
 
 	
 
-	  
 	  }

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iet.ExamCell.DAO.HomeDAO;
 import com.iet.ExamCell.Model.ComboDO;
+import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
@@ -128,6 +129,24 @@ public class HomeServiceImpl implements HomeService {
 	  public List<ComboDO> getAllPaper(){
 		  return homeDao.getAllPaper(); 
 	  }
+
+	@Override
+	public void saveInvigilation(Invigilation invigilation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Invigilation getInvigilationById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Invigilation> getAllInvigilation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 

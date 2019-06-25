@@ -190,7 +190,7 @@ public class HomeDAOImpl implements HomeDAO {
 
 		  public Papers showSubjects(Papers subject) {
 
-		    String sql = "select  tbl_trn_papers.num_trn_paper_id, "+
+		    String sql = "select tbl_trn_papers.num_trn_paper_id, "+
 "tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
 "tbl_mst_dept.num_dept_id, tbl_mst_dept.vch_dept_name,"+
 "tbl_mst_year.num_year_id, tbl_mst_year.num_year"+
@@ -327,8 +327,18 @@ public class HomeDAOImpl implements HomeDAO {
 
 	  public Seating showSeating(Seating seating) {
 
-	    String sql = "select num_seating_id, num_hall_Id, num_year_id, num_degree_id, num_section_id, num_nominal_role_id, num_total_no_of_students from tbl_trn_seating";
-
+	    String sql = "select num_seating_id,"+ 
+	    		" tbl_mst_hall.num_hall_id, tbl_mst_hall.vch_hall_no,"+
+	    		" CONCAT(tbl_mst_year.num_year,' ', tbl_mst_degree.vch_degree_name,' ', tbl_mst_section.vch_section) AS vch_class,"+
+	    		" tbl_mst_nominal_role.num_nominal_role_id, tbl_mst_nominal_role.vch_reg_number,num_total_no_of_students"+
+	    		" from tbl_trn_seating, tbl_mst_hall, tbl_mst_year, tbl_mst_degree, tbl_mst_section, tbl_mst_nominal_role"+
+	    		" where tbl_trn_seating.num_hall_id = tbl_mst_hall.num_hall_id"+
+	    		" AND tbl_trn_seating.num_year_id = tbl_mst_year.num_year_id"+
+	    		" AND tbl_trn_seating.num_degree_id = tbl_mst_degree.num_degree_id"+
+	    		" AND tbl_trn_seating.num_section_id = tbl_mst_section.num_section_id"+
+	    		" AND tbl_trn_seating.num_nominal_role_id = tbl_mst_nominal_role.num_nominal_role_id"+
+	    		" order by num_seating_id";
+	    
 	    List<Seating> seatings = jdbcTemplate.query(sql, new SeatingMapper());
 	    
 	    return seatings.size() > 0 ? seatings.get(0) : null;
@@ -344,19 +354,33 @@ public class HomeDAOImpl implements HomeDAO {
 		    return jdbcTemplate.update(sql);  
 		}  
 	     public Seating getSeatingById(int id){  
-		    String sql="select num_seating_id, num_hall_id, num_year_id, num_degree_id, num_section_id, num_nominal_role_id, num_total_no_of_students from tbl_trn_seating where num_seating_id=?";  
+		    String sql="select num_seating_id,"+ 
+"tbl_mst_hall.num_hall_id, tbl_mst_hall.vch_hall_no,"+
+"concat(tbl_mst_year.num_year, tbl_mst_degree.vch_degree_name, tbl_mst_section.vch_section) as vch_class,"+
+"tbl_mst_nominal_role.num_nominal_role_id, tbl_mst_nominal_role.vch_reg_number,num_total_no_of_students"+
+"from tbl_trn_seating where num_seating_id=?";  
 		    return jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Seating>(Seating.class));  
 		}  
 			public List<Seating> getAllSeating() {
-				return jdbcTemplate.query("select num_seating_id, num_hall_id, num_year_id, num_degree_id, num_section_id, num_nominal_role_id, num_total_no_of_students from tbl_trn_Seating",new RowMapper<Seating>(){  
+				return jdbcTemplate.query("select num_seating_id,"+ 
+			    		" tbl_mst_hall.num_hall_id, tbl_mst_hall.vch_hall_no, "+
+			    		" CONCAT(tbl_mst_year.num_year,' ',tbl_mst_degree.vch_degree_name,' ',tbl_mst_section.vch_section) as vch_class,"+
+			    		" tbl_mst_nominal_role.num_nominal_role_id, tbl_mst_nominal_role.vch_reg_number, num_total_no_of_students"+
+			    		" from tbl_trn_seating, tbl_mst_hall, tbl_mst_year, tbl_mst_degree, tbl_mst_section, tbl_mst_nominal_role"+
+			    		" where tbl_trn_seating.num_hall_id = tbl_mst_hall.num_hall_id"+
+			    		" AND tbl_trn_seating.num_year_id = tbl_mst_year.num_year_id"+
+			    		" AND tbl_trn_seating.num_degree_id = tbl_mst_degree.num_degree_id"+
+			    		" AND tbl_trn_seating.num_section_id = tbl_mst_section.num_section_id"+
+			    		" AND tbl_trn_seating.num_nominal_role_id = tbl_mst_nominal_role.num_nominal_role_id"+
+			    		" order by num_seating_id",new RowMapper<Seating>(){  
 			        public Seating mapRow(ResultSet rs, int row) throws SQLException {  
 			        	Seating e=new Seating();  
 			            e.setSeatingId(rs.getInt(1));
-			        	e.setHallnoId(rs.getInt(2));  
-			            e.setYearId(rs.getInt(3));  
-			            e.setDegreeId(rs.getInt(4));  
-			            e.setSectionId(rs.getInt(5));  
-			            e.setNominalRoleId(rs.getInt(6));
+			        	e.setHallnoId(rs.getInt(2));
+			        	e.setHallName(rs.getString(3));
+			            e.setClassName(rs.getString(4)); 
+			            e.setNominalRoleId(rs.getInt(5));  
+			            e.setNominalRoleName(rs.getString(6));
 			            e.setNoofstudents(rs.getInt(7));
 			           
 			            return e;  
@@ -418,7 +442,6 @@ public class HomeDAOImpl implements HomeDAO {
 		        }  
 		    });  
 		}
-		}  
 
 class NominalRoleMapper implements RowMapper<NominalRole> {
 
@@ -467,15 +490,23 @@ class SeatingMapper implements RowMapper<Seating> {
 		  Seating seating = new Seating();
 		  seating.setSectionId(rs.getInt("num_seating_id"));
 		  seating.setHallnoId(rs.getInt("num_hall_id"));
-		  seating.setYearId(rs.getInt("num_year_id"));
-		  seating.setDegreeId(rs.getInt("num_degree_id"));
-		  seating.setSectionId(rs.getInt("num_section_id"));
+		  seating.setHallName(rs.getString("vch_hall_no"));
+		  //seating.setYearId(rs.getInt("num_year_id"));
+		  //seating.setYearName(rs.getInt("num_year"));
+		  //seating.setDegreeId(rs.getInt("num_degree_id"));
+		  //seating.setDegreeName(rs.getString("vch_degree_name"));
+		  //seating.setSectionId(rs.getInt("num_section_id"));
+		  //seating.setSectionName(rs.getString("vch_section"));
+		  seating.setClassName(rs.getString("vch_class"));
 		  seating.setNominalRoleId(rs.getInt("num_nominal_role_id"));
+		  seating.setNominalRoleName(rs.getString("vch_reg_number"));
 		  seating.setNoofstudents(rs.getInt("num_total_no_of_students"));
 		  
 	    return seating;
 	  }
 }
+}
+
 
 
 	

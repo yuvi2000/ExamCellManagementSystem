@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iet.ExamCell.Model.ComboDO;
+import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
 import com.iet.ExamCell.Model.NominalRole;
 import com.iet.ExamCell.Model.Papers;
@@ -258,4 +259,55 @@ public String viewSeating(Model m){
     return "ViewSeating"; 
     
 } 
+@RequestMapping("/invigilation")  
+public String showInvigilationform(Map<String, Object> model){  
+	model.put("invigilation", new Invigilation());
+    
+    List<ComboDO> hallList = homeService.getAllHall();
+    model.put("hallList", hallList);
+    return "Invigilation"; 
+    
+}
+
+
+/*It saves object into database. The @ModelAttribute puts request data 
+ *  into model object. You need to mention RequestMethod.POST method  
+ *  because default request is GET*/  
+@RequestMapping(value="/saveInvigilation",method = RequestMethod.POST)  
+public String saveInvigilation(@ModelAttribute Invigilation invigilation){
+	
+	if(invigilation.getInvigilationId()>0)
+	{
+	//	homeService.updateInvigilation(invigilation);
+	}
+	else
+	{
+		homeService.saveInvigilation(invigilation);  
+	}
+    return "redirect:/viewInvigilation";
+}
+
+/* It displays object data into form for the given id.  
+ * The @PathVariable puts URL data into variable.*/  
+@RequestMapping(value="/EditInvigilation/{id}")  
+public String EditInvigilation(@PathVariable int id, Model m){  
+	Invigilation invigilation=homeService.getInvigilationById(id);  
+    m.addAttribute("command",invigilation);
+    return "Invigilation";  
+} 
+
+@RequestMapping(value="/EditsaveInvigilation",method = RequestMethod.POST)  
+public String EditsaveInvigilation(@ModelAttribute("invigilation") Invigilation invigilation){  
+	homeService.saveInvigilation(invigilation);  
+    return "redirect:/viewInvigilation";  
+}  
+
+@RequestMapping("/viewInvigilation")  
+public String viewInvigilation(Model m){  
+    List<Invigilation> list=homeService.getAllInvigilation();  
+    m.addAttribute("list",list);
+    return "ViewInvigilation"; 
+    
+} 
+
 }
