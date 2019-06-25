@@ -10,7 +10,7 @@
 <body>
 <form:form method="post" class="example" action="saveInvigilation" modelAttribute="invigilation">
 <div class="fsize">FACULTY INVIGILATION SCHEDULE</div><br><br><br>
-Hall no:<form:input path="hallno"/><br><br>
+Hall no:<form:input path="hallnoId"/><br><br>
 Date:<form:input type="date" path="date"/><br><br>
 Session:<form:input path="session"/><br><br>
 <table>

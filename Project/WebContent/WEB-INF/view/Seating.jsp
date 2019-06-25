@@ -23,14 +23,43 @@ Section:<form:select path="sectionId" id="section">
 <form:option value="0" label="----Select Section----"/>
 <form:options items="${sectionList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-Regno:<form:select path="nominalRoleId" id="nominalRoleId">
+From:<form:select path="nominalRoleId" id="from">
 <form:option value="0" label="----Select Regno----"/>
 <form:options items="${regnoList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-Total no of students:<form:input path="noofstudents" id="noofstudents"/><br><br>
+upto:<form:select path="nominalRoleId" id="upto" onChange="str()">
+<form:option value="0" label="----Select Regno----"/>
+<form:options items="${regnoList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Total no of students:<form:input path="noofstudents" id="noofstudents" onblur="str();"/><br><br>
 
 <button type="submit">Save</button>
 <button type="button">Cancel</button><br><br>
+<script> 
+function str()
+{
+	
+	var from = document.getElementById("from").options[document.getElementById("from").selectedIndex].text;
+	var upto = document.getElementById("upto").options[document.getElementById("upto").selectedIndex].text;
+	//var noofstudents = document.getElementById("noofstudents").text;
+		
+	if((from.substr(0,5) == upto.substr(0,5)) && from.substr(5)>0 && upto.substr(5))
+	{
+		var regnumberfrom =from.substr(5);
+		var regnumberupto =upto.substr(5);
+		
+		var noofstudents =(regnumberupto-regnumberfrom)+1;
+		if(noofstudents >0)
+			document.getElementById("noofstudents").value = noofstudents;
+		else
+			alert("Choose valid regno!");
+	}
+	else
+	{
+			alert("Choose valid regno!");
+	}
+	}
+	</script>
 <table border=1>
     <tr>
         <th scope="col">S.no</th>
