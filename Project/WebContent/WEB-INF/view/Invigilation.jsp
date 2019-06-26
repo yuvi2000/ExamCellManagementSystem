@@ -13,6 +13,8 @@
 Hall no:<form:input path="hallnoId"/><br><br>
 Date:<form:input type="date" path="date"/><br><br>
 Session:<form:input path="session"/><br><br>
+Faculty Name:<form:input path="facultyId"/><br><br>
+Faculty Dept:<form:input path="session"/><br><br>
 <table>
 <br><br>
 <tr>
