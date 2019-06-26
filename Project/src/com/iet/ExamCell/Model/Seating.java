@@ -16,8 +16,11 @@ public class Seating implements Serializable {
 	private String className;
 	private int nominalRoleId;
 	private String nominalRolefrom;
+	private String nominalRolefromName;
 	private String nominalRoleupto;
+	private String nominalRoleuptoName;
 	private int noofstudents;
+	private String regnumbers;
 	
 	public Seating() 
 	{
@@ -27,7 +30,9 @@ public class Seating implements Serializable {
 	public Seating(int seatingId, int hallnoId, String hallName, int yearId,
 			int yearName, int degreeId, String degreeName, int sectionId,
 			String sectionName, String className, int nominalRoleId,
-			String nominalRolefrom, String nominalRoleupto, int noofstudents) {
+			String nominalRolefrom, String nominalRolefromName,
+			String nominalRoleupto, String nominalRoleuptoName,
+			int noofstudents, String regnumbers) {
 		super();
 		this.seatingId = seatingId;
 		this.hallnoId = hallnoId;
@@ -41,8 +46,11 @@ public class Seating implements Serializable {
 		this.className = className;
 		this.nominalRoleId = nominalRoleId;
 		this.nominalRolefrom = nominalRolefrom;
+		this.nominalRolefromName = nominalRolefromName;
 		this.nominalRoleupto = nominalRoleupto;
+		this.nominalRoleuptoName = nominalRoleuptoName;
 		this.noofstudents = noofstudents;
+		this.regnumbers = regnumbers;
 	}
 
 	public int getSeatingId() {
@@ -141,12 +149,28 @@ public class Seating implements Serializable {
 		this.nominalRolefrom = nominalRolefrom;
 	}
 
+	public String getNominalRolefromName() {
+		return nominalRolefromName;
+	}
+
+	public void setNominalRolefromName(String nominalRolefromName) {
+		this.nominalRolefromName = nominalRolefromName;
+	}
+
 	public String getNominalRoleupto() {
 		return nominalRoleupto;
 	}
 
 	public void setNominalRoleupto(String nominalRoleupto) {
 		this.nominalRoleupto = nominalRoleupto;
+	}
+
+	public String getNominalRoleuptoName() {
+		return nominalRoleuptoName;
+	}
+
+	public void setNominalRoleuptoName(String nominalRoleuptoName) {
+		this.nominalRoleuptoName = nominalRoleuptoName;
 	}
 
 	public int getNoofstudents() {
@@ -157,6 +181,15 @@ public class Seating implements Serializable {
 		this.noofstudents = noofstudents;
 	}
 
-	
+	public String getRegnumbers() {
+		return regnumbers;
+	}
+
+
+	public void setRegnumbers(String regnumbers) {
+		this.regnumbers = regnumbers;
+		
+	}
+
 	
 }
