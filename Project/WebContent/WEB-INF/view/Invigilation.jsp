@@ -10,11 +10,21 @@
 <body>
 <form:form method="post" class="example" action="saveInvigilation" modelAttribute="invigilation">
 <div class="fsize">FACULTY INVIGILATION SCHEDULE</div><br><br><br>
-Hall no:<form:input path="hallnoId"/><br><br>
+Hall no:<form:select path="hallnoId" id="hall">
+<form:option value="0" label="----Select Hall----"/>
+<form:options items="${hallList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
 Date:<form:input type="date" path="date"/><br><br>
 Session:<form:input path="session"/><br><br>
-Faculty Name:<form:input path="facultyId"/><br><br>
-Faculty Dept:<form:input path="session"/><br><br>
+Faculty Name:<form:select path="facultyId" id="facultyId">
+<form:option value="0" label="----Select Faculty----"/>
+<form:options items="${facultyList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+Dept:<form:select path="deptId" id="dept">
+<form:option value="0" label="----Select Dept----"/>
+<form:options items="${deptList}" itemValue="id" itemLabel="value"/> 
+</form:select><br><br>
+
 <table>
 <br><br>
 <tr>
