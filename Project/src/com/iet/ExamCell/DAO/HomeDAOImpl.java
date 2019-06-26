@@ -607,7 +607,7 @@ public void registerInvigilation(Invigilation faculty){
 	        }  
 	    });  
 	}
-	public List<ComboDO> getHallId(){  
+	public List<ComboDO> getAllHallId(){  
 	    return jdbcTemplate.query("select num_section_id, vch_section from tbl_mst_section where char_active_status='Y'",new RowMapper<ComboDO>(){  
 	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ComboDO e=new ComboDO();  
@@ -617,6 +617,8 @@ public void registerInvigilation(Invigilation faculty){
 	        }  
 	    });  
 	}
+	
+	
 	class InvigilationMapper implements RowMapper<Invigilation> {
 
 		  public Invigilation mapRow(ResultSet rs, int arg1) throws SQLException {
