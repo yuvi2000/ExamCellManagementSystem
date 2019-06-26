@@ -23,11 +23,11 @@ Section:<form:select path="sectionId" id="section">
 <form:option value="0" label="----Select Section----"/>
 <form:options items="${sectionList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-From:<form:select path="nominalRoleId" id="from">
+From:<form:select path="nominalRolefrom" id="from">
 <form:option value="0" label="----Select Regno----"/>
 <form:options items="${regnoList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-upto:<form:select path="nominalRoleId" id="upto" onChange="str()">
+upto:<form:select path="nominalRoleupto" id="upto" onChange="str()">
 <form:option value="0" label="----Select Regno----"/>
 <form:options items="${regnoList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
