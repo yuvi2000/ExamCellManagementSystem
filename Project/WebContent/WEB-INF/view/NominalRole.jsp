@@ -12,7 +12,7 @@ $(document).ready(function(){
 $('#dept').on('change',function(){
 
    var deptId = $(this).val();
-   var option="option value='0'>--Select Degree--</option>";
+   var option = "option value='0'>--Select Degree--</option>";
    $.ajax({
        type: 'GET',
        url: "degrees/" + deptId,
@@ -23,7 +23,7 @@ $('#dept').on('change',function(){
            $('#degree').html(option)
        },
        error:function(){
-    	   $('#degree').html(option)
+      $('#degree').html(option)
            alert("error");
        }
    });
@@ -32,6 +32,7 @@ $('#dept').on('change',function(){
 });
  
 </script>
+
 </head>
 <body>
 <h2><center>NOMINAL ROLE</center></h2><br><br>
@@ -58,6 +59,7 @@ Degree:<form:select path="degree" id="degree">
 <form:option value="0" label="--Select Degree--"/>
 </form:select>
 <br><br>
+
 Section:<form:select path="section" id="section">
 <form:option value="0" label="----Select Section----"/>
 <form:options items="${sectionList}" itemValue="id" itemLabel="value"/> 

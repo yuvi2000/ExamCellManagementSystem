@@ -16,9 +16,9 @@ Hall no:<form:select path="hallnoId" id="hall">
 </form:select><br><br>
 Date:<form:input type="date" path="date"/><br><br>
 Session:<form:select path="session" id="degree">
-<form:options value="0" label="--Select Session--"/>
-<form:options for="">FN </form:options>
-<form:options for="">AN </form:options>
+<form:option value="0" label="--Select Session--"/>
+<form:option value="FN"/>
+<form:option value="AN"/>
 </form:select><br><br>
 Faculty Name:<form:select path="facultyId" id="facultyId">
 <form:option value="0" label="----Select Faculty----"/>
