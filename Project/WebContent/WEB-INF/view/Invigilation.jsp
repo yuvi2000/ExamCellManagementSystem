@@ -15,7 +15,11 @@ Hall no:<form:select path="hallnoId" id="hall">
 <form:options items="${hallList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
 Date:<form:input type="date" path="date"/><br><br>
-Session:<form:input path="session"/><br><br>
+Session:<form:select path="session" id="degree">
+<form:options value="0" label="--Select Session--"/>
+<form:options for="">FN </form:options>
+<form:options for="">AN </form:options>
+</form:select><br><br>
 Faculty Name:<form:select path="facultyId" id="facultyId">
 <form:option value="0" label="----Select Faculty----"/>
 <form:options items="${facultyList}" itemValue="id" itemLabel="value"/> 
@@ -24,7 +28,7 @@ Dept:<form:select path="deptId" id="dept">
 <form:option value="0" label="----Select Dept----"/>
 <form:options items="${deptList}" itemValue="id" itemLabel="value"/> 
 </form:select><br><br>
-
+<button type="Submit">save</button><br><br>
 <table>
 <br><br>
 <tr>
