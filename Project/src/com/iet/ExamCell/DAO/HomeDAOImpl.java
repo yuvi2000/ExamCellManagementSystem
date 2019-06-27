@@ -189,7 +189,7 @@ public class HomeDAOImpl implements HomeDAO {
 		    });  
 		}
 		public List<ComboDO> getAllDegree(int deptId){  
-		    return jdbcTemplate.query("select num_degree_id, vch_degree_name from tbl_mst_degree where char_active_status='Y'",new RowMapper<ComboDO>(){  
+		    return jdbcTemplate.query("select num_degree_id, vch_degree_name from tbl_mst_degree where char_active_status='Y' and num_dept_id="+deptId,new RowMapper<ComboDO>(){  
 		        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 		        	ComboDO e=new ComboDO();  
 		            e.setId(rs.getInt(1));
@@ -601,7 +601,7 @@ public void registerInvigilation(Invigilation faculty){
 	     return jdbcTemplate.update(sql);  
 	}  
 	public int deleteInvigilation(int id){  
-	    String sql="delete from tbl_mst_nominal_role where num_nominal_role_id="+id+"";  
+	    String sql="delete from tbl_trn_invigilation where num_invigilation_id="+id+"";  
 	    return jdbcTemplate.update(sql);  
 	}  
 	public Invigilation getInvigilationById(int id){  
@@ -637,8 +637,7 @@ public void registerInvigilation(Invigilation faculty){
 	}*/
 	
 	public List<ComboDO> getAllFaculty(){  
-	    return jdbcTemplate.query(""
-	    		+ "select num_faculty_id, vch_faculty_name from tbl_mst_faculty where char_active_status='Y'",new RowMapper<ComboDO>(){  
+	    return jdbcTemplate.query("select num_faculty_id, vch_faculty_name from tbl_mst_faculty where char_active_status='Y'",new RowMapper<ComboDO>(){  
 	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ComboDO e=new ComboDO();  
 	            e.setId(rs.getInt(1));
@@ -673,6 +672,23 @@ public void registerInvigilation(Invigilation faculty){
 		    return  faculty;
 		  }
 		}
+	@Override
+	public Invigilation showInvigilation(Invigilation faculty) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Invigilation getInvigilation(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Invigilation> getAllInvigilation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
