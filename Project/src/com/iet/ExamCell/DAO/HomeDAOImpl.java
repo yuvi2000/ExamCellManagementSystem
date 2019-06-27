@@ -98,9 +98,21 @@ public class HomeDAOImpl implements HomeDAO {
 
 	  public NominalRole showStudents(NominalRole student) {
 
-	    String sql = "select num_nominal_role_id, vch_reg_number, vch_name, dtt_year_of_joining, num_year_id, num_degree_id, num_dept_id,num_section_id, vch_email_id from tbl_mst_nominal_role";// where num_Student_Id=" + student.getStudentId() ;//" and vch_student_fname='" + student.getFirstname() + "'";
-
-	    List<NominalRole> students = jdbcTemplate.query(sql, new NominalRoleMapper());
+	    String sql = "select num_nominal_role_id,"+ 
+	    		"vch_reg_number, vch_name,"+ 
+	    		"dtt_year_of_joining,"+ 
+	    		"tbl_mst_year.num_year_id, tbl_mst_year.num_year,"+
+	    		"tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
+	    		"tbl_mst_dept.num_dept_id, tbl_mst_dept.vch_dept_name,"+
+	    		"tbl_mst_section.num_section_id, tbl_mst_section.vch_section,"+ 
+	    		"vch_email_id"+ 
+	    		" from tbl_mst_nominal_role, tbl_mst_year, tbl_mst_degree, tbl_mst_dept, tbl_mst_section"+
+	    		" where tbl_mst_nominal_role.num_year_id = tbl_mst_year.num_year_id"+
+	    		" AND tbl_mst_nominal_role.num_degree_id = tbl_mst_degree.num_degree_id"+
+	    		" AND tbl_mst_nominal_role.num_dept_id = tbl_mst_dept.num_dept_id"+
+	    		" AND tbl_mst_nominal_role.num_section_id = tbl_mst_section.num_section_id"+
+	            " order by num_nominal_role_id";
+	    		List<NominalRole> students = jdbcTemplate.query(sql, new NominalRoleMapper());
 
 	    return students.size() > 0 ? students.get(0) : null;
 	  }
@@ -115,22 +127,49 @@ public class HomeDAOImpl implements HomeDAO {
 		    return jdbcTemplate.update(sql);  
 		}  
 		public NominalRole getNominalRoleById(int regno){  
-		    String sql="select num_nominal_role_id, vch_name, dtt_year_of_joining, num_year_id, num_degree_id, num_dept_id, num_section_id, vch_email_id from tbl_mst_nominal_role where num_nominal_role_id=?";  
+		    String sql="select num_nominal_role_id,"+ 
+		    		"vch_reg_number, vch_name,"+ 
+		    		"dtt_year_of_joining,"+ 
+		    		"tbl_mst_year.num_year_id, tbl_mst_year.num_year,"+
+		    		"tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
+		    		"tbl_mst_dept.num_dept_id, tbl_mst_dept.vch_dept_name,"+
+		    		"tbl_mst_section.num_section_id, tbl_mst_section.vch_section,"+ 
+		    		"vch_email_id"+ 
+		    		" from tbl_mst_nominal_role, tbl_mst_year, tbl_mst_degree, tbl_mst_dept, tbl_mst_section"+
+		    		" where num_nominal_role_id=?";  
 		    return jdbcTemplate.queryForObject(sql, new Object[]{regno},new BeanPropertyRowMapper<NominalRole>(NominalRole.class));  
 		}  
 		public List<NominalRole> getAllNominalRoles(){  
-		    return jdbcTemplate.query("select num_nominal_role_id, vch_reg_number, vch_name, dtt_year_of_joining, num_year_id, num_degree_id, num_dept_id, num_section_id, vch_email_id  from tbl_mst_nominal_role",new RowMapper<NominalRole>(){  
+		    return jdbcTemplate.query("select num_nominal_role_id,"+ 
+	    		"vch_reg_number, vch_name,"+ 
+	    		"dtt_year_of_joining,"+ 
+	    		"tbl_mst_year.num_year_id, tbl_mst_year.num_year,"+
+	    		"tbl_mst_degree.num_degree_id, tbl_mst_degree.vch_degree_name,"+
+	    		"tbl_mst_dept.num_dept_id, tbl_mst_dept.vch_dept_name,"+
+	    		"tbl_mst_section.num_section_id, tbl_mst_section.vch_section,"+ 
+	    		"vch_email_id"+ 
+	    		" from tbl_mst_nominal_role, tbl_mst_year, tbl_mst_degree, tbl_mst_dept, tbl_mst_section"+
+	    		" where tbl_mst_nominal_role.num_year_id = tbl_mst_year.num_year_id"+
+	    		" AND tbl_mst_nominal_role.num_degree_id = tbl_mst_degree.num_degree_id"+
+	    		" AND tbl_mst_nominal_role.num_dept_id = tbl_mst_dept.num_dept_id"+
+	    		" AND tbl_mst_nominal_role.num_section_id = tbl_mst_section.num_section_id"+
+	    		" order by num_nominal_role_id",new RowMapper<NominalRole>(){  
 		        public NominalRole mapRow(ResultSet rs, int row) throws SQLException {  
 		        	NominalRole e=new NominalRole();  
 		            e.setNominalRoleId(rs.getInt(1));
 		        	e.setRegno(rs.getString(2));  
-		            e.setName(rs.getString(3));  
-		            e.setDegree(rs.getInt(6));  
-		            e.setDept(rs.getInt(7));  
-		            e.setSection(rs.getInt(8));
-		            e.setYear(rs.getInt(5));
+		            e.setName(rs.getString(3)); 
 		            e.setYoj(rs.getDate(4));
-		            e.setEmail(rs.getString(9));
+		            e.setDegree(rs.getInt(7));
+		            e.setDegreeName(rs.getString(8));  
+		            e.setDept(rs.getInt(9)); 
+		            e.setDeptName(rs.getString(10)); 
+		            e.setSection(rs.getInt(11));
+		            e.setSectionName(rs.getString(12));  
+		            e.setYear(rs.getInt(5));
+		            e.setYearName(rs.getInt(6));  
+		           
+		            e.setEmail(rs.getString(13));
 		            
 		            
 		            return e;  
@@ -149,7 +188,7 @@ public class HomeDAOImpl implements HomeDAO {
 		        }  
 		    });  
 		}
-		public List<ComboDO> getDegree(){  
+		public List<ComboDO> getAllDegree(int deptId){  
 		    return jdbcTemplate.query("select num_degree_id, vch_degree_name from tbl_mst_degree where char_active_status='Y'",new RowMapper<ComboDO>(){  
 		        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 		        	ComboDO e=new ComboDO();  
@@ -264,7 +303,7 @@ public class HomeDAOImpl implements HomeDAO {
 			
 			
 			// to load Department combobox values
-			public List<ComboDO> getAllDept1(){  
+			/*public List<ComboDO> getAllDept1(){  
 			    return jdbcTemplate.query("select num_dept_id, vch_dept_name from tbl_mst_dept where char_active_status='Y'",new RowMapper<ComboDO>(){  
 			        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 			        	ComboDO e=new ComboDO();  
@@ -293,7 +332,7 @@ public class HomeDAOImpl implements HomeDAO {
 			            return e;  
 			        }  
 			    });  
-			}
+			}*/
 			
 			public List<ComboDO> getAllSemester(){  
 			    return jdbcTemplate.query("select num_sem_id, vch_sem_name from tbl_mst_semesters where char_active_status='Y'",new RowMapper<ComboDO>(){  
@@ -430,7 +469,7 @@ public class HomeDAOImpl implements HomeDAO {
 			    });  
 			}
 			
-		public List<ComboDO> getYear(){  
+		/*public List<ComboDO> getYear(){  
 		    return jdbcTemplate.query("select num_year_id, num_year from tbl_mst_year where char_active_status='Y'",new RowMapper<ComboDO>(){  
 		        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 		        	ComboDO e=new ComboDO();  
@@ -440,7 +479,7 @@ public class HomeDAOImpl implements HomeDAO {
 		        }  
 		    });  
 		}
-		public List<ComboDO> getAllDegree(){  
+		/*public List<ComboDO> getAllDegree(){  
 		    return jdbcTemplate.query("select num_degree_id, vch_degree_name from tbl_mst_degree where char_active_status='Y'",new RowMapper<ComboDO>(){  
 		        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 		        	ComboDO e=new ComboDO();  
@@ -449,8 +488,8 @@ public class HomeDAOImpl implements HomeDAO {
 		            return e;  
 		        }  
 		    });  
-		}
-		public List<ComboDO> getSection(){  
+		}*/
+		/*public List<ComboDO> getSection(){  
 		    return jdbcTemplate.query("select num_section_id, vch_section_name from tbl_mst_section where char_active_status='Y'",new RowMapper<ComboDO>(){  
 		        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 		        	ComboDO e=new ComboDO();  
@@ -460,7 +499,7 @@ public class HomeDAOImpl implements HomeDAO {
 		        }  
 		    });  
 		}
-		
+		*/
 		
 		public List<ComboDO> getAllRegno(){  
 		    return jdbcTemplate.query("select num_nominal_role_id, vch_reg_number from tbl_mst_nominal_role where char_active_status='Y'",new RowMapper<ComboDO>(){  
@@ -586,7 +625,7 @@ public void registerInvigilation(Invigilation faculty){
 	} 
 
 	// to load Department combobox values
-	public List<ComboDO> getDept(){  
+	/*public List<ComboDO> getDept(){  
 	    return jdbcTemplate.query("select num_dept_id, vch_dept_name from tbl_mst_dept where char_active_status='Y'",new RowMapper<ComboDO>(){  
 	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ComboDO e=new ComboDO();  
@@ -595,10 +634,11 @@ public void registerInvigilation(Invigilation faculty){
 	            return e;  
 	        }  
 	    });  
-	}
+	}*/
 	
 	public List<ComboDO> getAllFaculty(){  
-	    return jdbcTemplate.query("select num_year_id, num_year from tbl_mst_year where char_active_status='Y'",new RowMapper<ComboDO>(){  
+	    return jdbcTemplate.query(""
+	    		+ "select num_faculty_id, vch_faculty_name from tbl_mst_faculty where char_active_status='Y'",new RowMapper<ComboDO>(){  
 	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ComboDO e=new ComboDO();  
 	            e.setId(rs.getInt(1));
@@ -607,7 +647,7 @@ public void registerInvigilation(Invigilation faculty){
 	        }  
 	    });  
 	}
-	public List<ComboDO> getAllHallId(){  
+	/*public List<ComboDO> getAllHallId(){  
 	    return jdbcTemplate.query("select num_section_id, vch_section from tbl_mst_section where char_active_status='Y'",new RowMapper<ComboDO>(){  
 	        public ComboDO mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ComboDO e=new ComboDO();  
@@ -616,7 +656,7 @@ public void registerInvigilation(Invigilation faculty){
 	            return e;  
 	        }  
 	    });  
-	}
+	}*/
 	
 	
 	class InvigilationMapper implements RowMapper<Invigilation> {

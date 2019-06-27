@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iet.ExamCell.Model.ComboDO;
@@ -82,16 +83,21 @@ public class HomeController {
         
         List<ComboDO> deptList = homeService.getAllDept();
         model.put("deptList", deptList);
-        List<ComboDO> degreeList = homeService.getAllDegree();
+        /*List<ComboDO> degreeList = homeService.getAllDegree();
         model.put("degreeList", degreeList);
         List<ComboDO> yearList = homeService.getAllYear();
         model.put("yearList", yearList);
         List<ComboDO> sectionList = homeService.getAllSection();
-        model.put("sectionList", sectionList);
+        model.put("sectionList", sectionList);*/
         
     	    	return "NominalRole"; 
     }  
-
+    @RequestMapping(value = "degrees/{deptId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ComboDO> getAllDegree(@PathVariable("deptId") int deptId) {
+        return homeService.getAllDegree(deptId);
+    }
+    
     /*It saves object into database. The @ModelAttribute puts request data 
      *  into model object. You need to mention RequestMethod.POST method  
      *  because default request is GET*/  
@@ -140,8 +146,8 @@ public String showforms(Map<String, Object> model){
 	/*NominalRole nominalRole=homeService.getNominalRoleById(id);  
     m.addAttribute("command",nominalRole);*/
     
-    List<ComboDO> degreeList = homeService.getAllDegree();
-    model.put("degreeList", degreeList);
+    /*List<ComboDO> degreeList = homeService.getAllDegree();
+    model.put("degreeList", degreeList);*/
     List<ComboDO> deptList = homeService.getAllDept();
     model.put("deptList",deptList);
     List<ComboDO> yearList = homeService.getAllYear();
@@ -208,8 +214,8 @@ public String showSeating(Map<String, Object> model){
     model.put("hallList", hallList);
     List<ComboDO> yearList = homeService.getAllYear();
     model.put("yearList", yearList);
-    List<ComboDO> degreeList = homeService.getAllDegree();
-    model.put("degreeList", degreeList);
+   /* List<ComboDO> degreeList = homeService.getAllDegree();
+    model.put("degreeList", degreeList);*/
     List<ComboDO> sectionList = homeService.getAllSection();
     model.put("sectionList", sectionList);
     List<ComboDO> regnoList = homeService.getAllRegno();
@@ -265,6 +271,10 @@ public String showInvigilationform(Map<String, Object> model){
     
     List<ComboDO> hallList = homeService.getAllHall();
     model.put("hallList", hallList);
+    List<ComboDO> facultyList = homeService.getAllFaculty();
+    model.put("facultyList", facultyList);
+    List<ComboDO> deptList = homeService.getAllDept();
+    model.put("deptList", deptList);
     return "Invigilation"; 
     
 }

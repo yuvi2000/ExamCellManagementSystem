@@ -98,22 +98,19 @@ public class HomeServiceImpl implements HomeService {
 		  return homeDao.getAllDept(); 
 	  }
 	  
-	  public List<ComboDO> getAllDegree(){
-		  return homeDao.getAllDegree(); 
+	  public List<ComboDO> getAllDegree(int deptId){
+		  return homeDao.getAllDegree(deptId); 
 	  }
 	  
-	  public List<ComboDO> getDegree(){
-		  return homeDao.getAllDegree(); 
-	  }
 	  public List<ComboDO> getAllYear(){
 		  return homeDao.getAllYear(); 
 	  }
 	  public List<ComboDO> getYear(){
 		  return homeDao.getAllYear(); 
 	  }
-	  public List<ComboDO> getSection(){
+	 /* public List<ComboDO> getSection(){
 		  return homeDao.getSection(); 
-	  }
+	  }*/
 	  public List<ComboDO> getAllHall(){
 		  return homeDao.getAllHall();  
 	  }
@@ -128,6 +125,9 @@ public class HomeServiceImpl implements HomeService {
 	  }
 	  public List<ComboDO> getAllPaper(){
 		  return homeDao.getAllPaper(); 
+	  }
+	  public List<ComboDO> getAllFaculty(){
+		  return homeDao.getAllFaculty(); 
 	  }
 
 	@Override

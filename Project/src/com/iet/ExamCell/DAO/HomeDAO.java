@@ -38,21 +38,22 @@ public interface HomeDAO {
 	List<Papers> getAllPapers();
 	// to load Department combobox values
 	List<ComboDO> getAllDept();	
-	List<ComboDO> getAllDegree();
-	List<ComboDO> getDegree();
-	List<ComboDO> getYear();
+	List<ComboDO> getAllDegree(int deptId);
+	//List<ComboDO> getDegree();
+	//List<ComboDO> getYear();
 	List<ComboDO> getAllYear();
 	List<ComboDO> getAllSection();
-	List<ComboDO> getSection();
+	//List<ComboDO> getSection();
     List<ComboDO> getAllSemester();
 	List<ComboDO> getAllPaper();
-	List<ComboDO> getAllDept1();	
-	List<ComboDO> getAllDegree1();
-	List<ComboDO> getAllYear1();
+	//List<ComboDO> getAllDept1();	
+	//List<ComboDO> getAllDegree1();
+	//List<ComboDO> getAllYear1();
 	List<ComboDO> getAllRegno();
 	List<ComboDO> getAllHall();
 	Seating getSeatingById(int id);
 	List<Seating> getAllSeating();
+	List<ComboDO> getAllFaculty();
 	
 	
 	

@@ -42,17 +42,17 @@ public interface HomeService {
 	  int update1(Papers p);
 	  int updateseating(Seating p);
 	  
-	  List<ComboDO> getAllDegree();
-	  List<ComboDO> getDegree();
-	  List<ComboDO> getSection();
+	  //List<ComboDO> getAllDegree();
+	  //List<ComboDO> getDegree();
+	  //List<ComboDO> getSection();
 	  List<ComboDO> getAllDept();
 	  List<ComboDO> getAllYear();
-	  List<ComboDO> getYear();
+	  //List<ComboDO> getYear();
 	  List<ComboDO> getAllSection();
 	  List<ComboDO> getAllSemester();
 	  List<ComboDO> getAllPaper();
 	  List<ComboDO> getAllHall();
-	List<ComboDO> getAllRegno();
+	  List<ComboDO> getAllRegno();
 
 	  
 	void savePapers(Papers papers);
@@ -70,6 +70,10 @@ public interface HomeService {
 	Invigilation getInvigilationById(int id);
 
 	List<Invigilation> getAllInvigilation();
+
+	List<ComboDO> getAllDegree(int deptId);
+
+	List<ComboDO> getAllFaculty();
 
 	
 
