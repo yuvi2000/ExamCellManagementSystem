@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.iet.ExamCell.Model.ComboDO;
 import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
@@ -37,6 +36,9 @@ public interface HomeService {
 	  List<Papers> getAllPapers();
 	  
 		List<Seating> getAllSeating();
+		
+		List<Invigilation> getAllInvigilation();
+
 	  
 	  int update(NominalRole p);
 	  int update1(Papers p);
@@ -56,25 +58,19 @@ public interface HomeService {
 
 	  
 	void savePapers(Papers papers);
-
-	Papers getPapersById(int id);
-
-	
-	Seating getSeatingById(int id);
-
-
 	void saveSeating(Seating seating);
-
 	void saveInvigilation(Invigilation invigilation);
 
+	Papers getPapersById(int id);
+	Seating getSeatingById(int id);
 	Invigilation getInvigilationById(int id);
 
-	List<Invigilation> getAllInvigilation();
 
 	List<ComboDO> getAllDegree(int deptId);
 
 	List<ComboDO> getAllFaculty();
 
+	void updateInvigilation(Invigilation invigilation);
 	
 
 	  }

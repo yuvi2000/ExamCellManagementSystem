@@ -19,7 +19,7 @@ public Invigilation()
 
 public Invigilation(int invigilationId, int hallnoId, Date date,
 		String session, int facultyId, int deptId) {
-	super();
+
 	this.invigilationId = invigilationId;
 	this.hallnoId = hallnoId;
 	this.date = date;

@@ -42,7 +42,7 @@ public interface HomeDAO {
 	NominalRole getNominalRoleById(int regno);
 	Papers getPapersById(int semester);
 	Seating getSeatingById(int id);
-	Invigilation getInvigilation(int id);
+	Invigilation getInvigilationById(int id);
 
 	List<NominalRole> getAllNominalRoles();
 	List<Papers> getAllPapers();

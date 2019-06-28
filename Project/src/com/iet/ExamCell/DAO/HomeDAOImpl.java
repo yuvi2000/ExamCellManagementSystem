@@ -586,7 +586,7 @@ public void registerInvigilation(Invigilation faculty){
     	faculty.getDate(), faculty.getSession(), faculty.getHallnoId(), faculty.getFacultyId(), faculty.getDeptId()});
   }
 
-  public Invigilation showFaculties(Invigilation faculty) {
+public Invigilation showInvigilation(Invigilation faculty) {
 
     String sql = "select num_invigilation_id, dtt_date, vch_session, num_faculty_id, num_dept_id, num_year_id, num_degree_id, num_dept_id,num_section_id from tbl_mst_invigilation";// where num_Student_Id=" + student.getStudentId() ;//" and vch_student_fname='" + student.getFirstname() + "'";
 
@@ -608,7 +608,9 @@ public void registerInvigilation(Invigilation faculty){
 	    String sql="select num_invigilation_id, dtt_date, vch_session, num_hall_id, num_faculty_id, num_dept_id, from tbl_trn_invigilation where num_invigilation_id=?";  
 	    return jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Invigilation>(Invigilation.class));  
 	}  
-	public List<Invigilation> getAllInvigilations(){  
+	
+	public List<Invigilation> getAllInvigilation() {
+
 	    return jdbcTemplate.query("select num_invigilation_id, dtt_date, vch_session, num_hall_id, num_faculty_id, num_dept_id, from tbl_trn_invigilation",new RowMapper<Invigilation>(){  
 	        public Invigilation mapRow(ResultSet rs, int row) throws SQLException {  
 	        	Invigilation e=new Invigilation();  
@@ -671,24 +673,7 @@ public void registerInvigilation(Invigilation faculty){
 			  
 		    return  faculty;
 		  }
-		}
-	@Override
-	public Invigilation showInvigilation(Invigilation faculty) {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
-
-	@Override
-	public Invigilation getInvigilation(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Invigilation> getAllInvigilation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }
+	

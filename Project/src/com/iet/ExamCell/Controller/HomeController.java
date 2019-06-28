@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.iet.ExamCell.Model.ComboDO;
 import com.iet.ExamCell.Model.Invigilation;
 import com.iet.ExamCell.Model.Login;
@@ -288,7 +287,7 @@ public String saveInvigilation(@ModelAttribute Invigilation invigilation){
 	
 	if(invigilation.getInvigilationId()>0)
 	{
-	//	homeService.updateInvigilation(invigilation);
+	homeService.updateInvigilation(invigilation);
 	}
 	else
 	{
@@ -317,7 +316,55 @@ public String viewInvigilation(Model m){
     List<Invigilation> list=homeService.getAllInvigilation();  
     m.addAttribute("list",list);
     return "ViewInvigilation"; 
+}
+
+@RequestMapping("/attendance")  
+public String showAttendanceform(Map<String, Object> model){  
+	model.put("attendance", new Attendance());
     
+    List<ComboDO> hallList = homeService.getAllHall();
+    model.put("hallList", hallList);
+    return "Attendance"; 
+    
+}
+
+
+/*It saves object into database. The @ModelAttribute puts request data 
+ *  into model object. You need to mention RequestMethod.POST method  
+ *  because default request is GET*/  
+/*@RequestMapping(value="/saveAttendance",method = RequestMethod.POST)  
+public String saveAttendance(@ModelAttribute Attendance attendance){
+	
+	if(attendance.getAttendanceId()>0)
+	{
+	homeService.updateAttendance(attendance);
+	}
+	else
+	{
+		homeService.saveAttendance(attendance);  
+	}
+    return "redirect:/viewAttendance";
+}
+
+/* It displays object data into form for the given id.  
+ * The @PathVariable puts URL data into variable.*/  
+/*@RequestMapping(value="/EditAttendance/{id}")  
+public String EditAttendance(@PathVariable int id, Model m){  
+	Attendance attendance=homeService.getAttendanceById(id);  
+    m.addAttribute("command",attendance);
+    return "Attendance";  
 } 
 
+@RequestMapping(value="/EditsaveAttendance",method = RequestMethod.POST)  
+public String EditsaveAttendance(@ModelAttribute("attendance") Attendance attendance){  
+	homeService.saveAttendance(attendance);  
+    return "redirect:/viewAttendance";  
+}  
+
+@RequestMapping("/viewAttendance")  
+public String viewAttendance(Model m){  
+    List<Attendance> list=homeService.getAllAttendance();  
+    m.addAttribute("list",list);
+    return "ViewAttendance"; 
+}*/
 }

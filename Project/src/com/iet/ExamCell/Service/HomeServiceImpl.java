@@ -52,6 +52,9 @@ public class HomeServiceImpl implements HomeService {
 	  public void saveSeating(Seating seating) {
 		    homeDao.seatingPlan(seating);
 		  }
+	  public void saveInvigilation(Invigilation invigilation) {
+			homeDao.registerInvigilation(invigilation);			
+		}
 	  
 	  public NominalRole getNominalRoleById(int regno) {
 		    return homeDao.getNominalRoleById(regno);
@@ -64,6 +67,10 @@ public class HomeServiceImpl implements HomeService {
 	  public Seating getSeatingById(int id){
 		  return homeDao.getSeatingById(id);
 	  }
+	  
+	  public Invigilation getInvigilationById(int id) {
+			return homeDao.getInvigilationById(id);
+		}
 
 	  
 	  
@@ -79,6 +86,10 @@ public class HomeServiceImpl implements HomeService {
 	  public List<Seating> getAllSeating() {
 			return homeDao.getAllSeating();
 		}
+	  
+		public List<Invigilation> getAllInvigilation() {
+			return homeDao.getAllInvigilation();
+		}
 
 	  
 	  public int update(NominalRole p){
@@ -90,6 +101,10 @@ public class HomeServiceImpl implements HomeService {
 
 		public int updateseating(Seating p){
 			return homeDao.updateSeating(p);
+		}
+		
+		public int updateseating(Invigilation p){
+			return homeDao.updateInvigilation(p);
 		}
 		
 
@@ -130,24 +145,4 @@ public class HomeServiceImpl implements HomeService {
 		  return homeDao.getAllFaculty(); 
 	  }
 
-	@Override
-	public void saveInvigilation(Invigilation invigilation) {
-		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public Invigilation getInvigilationById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Invigilation> getAllInvigilation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-}
