@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <body>
    <form:form method="post" class="example" action="saveSeating" modelAttribute="seating">
-<div class="fsize">SEATING PLAN</div><br><br><br>
+<div class="menuBox">
+<h2><center>SEATING PLAN</center></h2>
 Hallno:<form:select path="hallnoId" id="hall">
 <form:option value="0" label="----Select hall----"/>
 <form:options items="${hallList}" itemValue="id" itemLabel="value"/> 
@@ -70,7 +71,30 @@ function str()
     </tr>
 </table>
 </form:form>
+</div>
 <style type="text/css">
+body{
+  font-family:"Arial", Serif;
+  background-color:#f4f4f4;
+  overflow-x:hidden;
+  background-image:url("https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?cs=srgb&dl=check-class-desk-7103.jpg&fm=jpg");
+  background-size:cover;
+  width:50%;
+}
+.menuBox
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 1010px;
+	height: 600px;
+	padding: 80px 40px;
+	box-sizing: border-box;
+	background:#a9a9a9;
+	opacity:0.8;
+}
+
 .fsize
 {
 font-size:25px;

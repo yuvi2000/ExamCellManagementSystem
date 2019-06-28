@@ -35,6 +35,7 @@ $('#dept').on('change',function(){
 
 </head>
 <body>
+<div class="menuBox">
 <h2><center>NOMINAL ROLE</center></h2><br><br>
 <form:form method="post" class="example" action="saveNominalRole" modelAttribute="nominalRole">
 <input type="checkbox"/><label>Single Candidate Entry</label>
@@ -76,11 +77,30 @@ Email:<form:input path="email" id="email" size="30"/><br><br>
 <th scope="col">Class</th>
 </tr>
 </table>
+</div>
 </form:form>
-<style>
-body
+<style type="text/css">
+
+body{
+  font-family:"Arial", Serif;
+  background-color:#f4f4f4;
+  overflow-x:hidden;
+  background-image:url("https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?cs=srgb&dl=check-class-desk-7103.jpg&fm=jpg");
+  background-size:cover;
+  width:50%;
+}
+.menuBox
 {
-background-image: url("");
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 1040px;
+	height: 600px;
+	padding: 80px 40px;
+	box-sizing: border-box;
+	background:#a9a9a9;
+	opacity:0.8;
 }
 fsize
 {
@@ -93,19 +113,20 @@ table
  border-collapse:collapse;    
 }
 form.example button {
- 
+  border:none;
+  outline:none;
   width: 10%;
   padding: 5px;
-  background: #2196F3;
-  color: white;
+  background: #1e90ff;
+  color:#fff;
   font-size: 12px;
-  border: 1px solid grey;
-  border-left: none;
+  border-radius: 20px;
   cursor: pointer;
 }
 
 form.example button:hover {
-  background: #0b7dda;
+  background: #006400;
+  color:#262626;
 }
 
 form.example::after {

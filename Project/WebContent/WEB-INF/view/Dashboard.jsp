@@ -20,7 +20,11 @@
       </a>
     </span>
 <ul class="navbar-nav">
-      <h1>ExamCell Management system</h1>
+		    
+		       <li> <a href="logOut">logout</a></li>
+               <li><a href="" >About</a></li>
+		       <li><a href="">Home</a></li>    	
+		  
     </ul>
   </nav>
   <div id="side-menu" class="side-nav">
@@ -35,8 +39,10 @@
     <a href="/ExamCell/dispatch">Dispatch</a>
   </div>
 
-  <div id="main">
-    <h1>Dashboard</h1>
+  <div id="menuBox">
+       <h1>Welcome!</h1>
+       <h1>You have been successfully logged in</h1>
+       
   </div>
   
 
@@ -57,8 +63,31 @@ body{
   font-family:"Arial", Serif;
   background-color:#f4f4f4;
   overflow-x:hidden;
-  background-image: url("https://www.fastweb.com/uploads/article_photo/photo/2161/crop380w_istock_000002193842xsmall-books.jpg");
+  background-image: url("https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?cs=srgb&dl=check-class-desk-7103.jpg&fm=jpg");
   background-size:cover;
+}
+
+li {
+    float: right;
+}
+h1
+{
+	color: #ffffff;
+	text-align: center;
+}
+
+
+.menuBox
+{
+	position: absolute;
+	top: 50%;
+	left: 60%;
+	transform: translate(-50%,-50%);
+	width: 800px;
+	height: 500px;
+	padding: 80px 40px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,.5);
 }
 
 .navbar{

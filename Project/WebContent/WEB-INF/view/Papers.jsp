@@ -3,8 +3,8 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
    <body>
+   <div class="menuBox">
 <h2><center>SUBJECTS FOR THE CLASSES</center></h2>
 <form:form method="post" class="example" action="savePapers" modelAttribute="papers">
 Degree:<form:select path="degreeId" id="degree">
@@ -38,7 +38,29 @@ Papers:<form:select path="paper" id="paper">
 </tr>
 </table>
 </form:form>
+</div>
 <style type="text/css">
+body{
+  font-family:"Arial", Serif;
+  background-color:#f4f4f4;
+  overflow-x:hidden;
+  background-image:url("https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?cs=srgb&dl=check-class-desk-7103.jpg&fm=jpg");
+  background-size:cover;
+  width:50%;
+}
+.menuBox
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 1010px;
+	height: 600px;
+	padding: 80px 40px;
+	box-sizing: border-box;
+	background:#a9a9a9;
+	opacity:0.8;
+}
 fsize
 {
 font-size:25px;
